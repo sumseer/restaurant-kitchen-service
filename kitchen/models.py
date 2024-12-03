@@ -5,6 +5,11 @@ from django.contrib.auth import settings
 class DishType(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
+    class Meta:
+        ordering = ("name",)
+        verbose_name = "dish type"
+        verbose_name_plural = "dish types"
+
     def __str__(self):
         return self.name
 
@@ -21,4 +26,9 @@ class Dish(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = "Dishes"
+        ordering = ("name",)
+        verbose_name = "dish"
+        verbose_name_plural = "dishes"
+
+    def __str__(self):
+        return self.name
