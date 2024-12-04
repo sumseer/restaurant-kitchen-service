@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dish Types</title>
+</head>
+<body>
+  <h1>Dish Types</h1>
+  <ul>
+    {% for dish_type in dish_types %}
+      <li>{{ dish_type.name }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'kitchen:dish-type-create' %}">Create New Dish Type</a>
+</body>
+</html>

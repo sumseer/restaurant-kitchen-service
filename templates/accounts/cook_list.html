@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooks</title>
+</head>
+<body>
+    <h1>Cooks</h1>
+    <ul>
+        {% for cook in cooks %}
+            <li>{{ cook.username }} ({{ cook.years_of_experience }} years of experience)</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'accounts:cook-create' %}">Create New Cook</a>
+</body>
+</html>

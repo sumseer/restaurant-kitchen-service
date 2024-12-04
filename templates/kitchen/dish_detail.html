@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dish.name }}</title>
+</head>
+<body>
+    <h1>{{ dish.name }}</h1>
+    <p><strong>Dish Type:</strong> {{ dish.dish_type.name }}</p>
+    <p><strong>Description:</strong> {{ dish.description }}</p>
+    <p><strong>Ingredients:</strong> {{ dish.ingredients }}</p>
+    <p><strong>Instructions:</strong> {{ dish.instructions }}</p>
+    
+    <a href="{% url 'kitchen:dish-update' dish.pk %}">Edit</a>
+    <a href="{% url 'kitchen:dish-delete' dish.pk %}">Delete</a>
+    <a href="{% url 'kitchen:dish-list' %}">Back to Dishes</a>
+</body>
+</html>
