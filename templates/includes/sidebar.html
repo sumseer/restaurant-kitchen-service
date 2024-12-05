@@ -1,8 +1,7 @@
-<ul class="sidebar-nav">
+<ul class="sidebar-nav list-group">
   {% if user.is_authenticated %}
     User:
     <a href="{% url "accounts:cook-detail" pk=user.id %}">{{ user.username }}</a>
-    <br>
       <form action="{% url "accounts:logout" %}" method="post">
         {% csrf_token %}
         <input class="btn btn-secondary" type="submit" value="Logout">
@@ -10,8 +9,9 @@
   {% else %}
       <a class="btn btn-secondary" href="{% url "accounts:login" %}">Sign in</a>
   {% endif %}
-  <li><a href="{% url "kitchen:index" %}">Home</a></li>
-  <li><a href="{% url "accounts:cook-list" %}">All cooks</a></li>
-  <li><a href="{% url "kitchen:dish-type-list" %}">Dish types</a></li>
-  <li><a href="{% url "kitchen:dish-list" %}">All dishes</a></li>
+  <br>
+  <li class="list-group-item"><a href="{% url "kitchen:index" %}">Home</a></li>
+  <li class="list-group-item"><a href="{% url "accounts:cook-list" %}">All cooks</a></li>
+  <li class="list-group-item"><a href="{% url "kitchen:dish-type-list" %}">Dish types</a></li>
+  <li class="list-group-item"><a href="{% url "kitchen:dish-list" %}">All dishes</a></li>
 </ul>
