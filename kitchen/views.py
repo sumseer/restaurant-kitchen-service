@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from accounts.models import Cook
+from kitchen.forms import DishForm, DishTypeSearchForm
 from kitchen.models import DishType, Dish
 
 @login_required
@@ -29,6 +30,21 @@ class DishTypeListView(LoginRequiredMixin, generic.ListView):
     template_name = "kitchen/dish_type_list.html"
     context_object_name = "dish_types"
     paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishTypeListView, self).get_context_data(**kwargs)
+        search_name = self.request.GET.get("name", "")
+        context["search_form"] = DishTypeSearchForm(
+            initial={"name": search_name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = DishType.objects.all()
+        search_name = self.request.GET.get("name")
+        if search_name:
+            return queryset.filter(name__icontains=search_name)
+        return queryset
 
 
 class DishTypeCreateView(LoginRequiredMixin, generic.CreateView):
@@ -57,6 +73,20 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "dishes"
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishListView, self).get_context_data(**kwargs)
+        search_name = self.request.GET.get("name", "")
+        context["search_form"] = DishTypeSearchForm(
+            initial={"name": search_name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Dish.objects.all()
+        search_name = self.request.GET.get("name")
+        if search_name:
+            return queryset.filter(name__icontains=search_name)
+        return queryset
 
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
@@ -67,16 +97,16 @@ class DishDetailView(LoginRequiredMixin, generic.DetailView):
 
 class DishCreateView(LoginRequiredMixin, generic.CreateView):
     model = Dish
-    fields = "__all__"
     template_name = "kitchen/dish_form.html"
     success_url = reverse_lazy("kitchen:dish-list")
+    form_class = DishForm
 
 
 class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Dish
-    fields = "__all__"
     template_name = "kitchen/dish_form.html"
     success_url = reverse_lazy("kitchen:dish-list")
+    form_class = DishForm
 
 
 class DishDeleteView(LoginRequiredMixin, generic.DeleteView):

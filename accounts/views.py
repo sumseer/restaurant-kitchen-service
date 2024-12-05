@@ -1,9 +1,11 @@
+from lib2to3.fixes.fix_input import context
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from accounts.forms import CookCreationForm
+from accounts.forms import CookCreationForm, CookSearchForm
 from accounts.models import Cook
 
 
@@ -13,11 +15,27 @@ class CookListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "cooks"
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CookListView, self).get_context_data(**kwargs)
+        search_name = self.request.GET.get("username", "")
+        context["search_form"] = CookSearchForm(
+            initial={"username": search_name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Cook.objects.all()
+        search_name = self.request.GET.get("username")
+        if search_name:
+            return queryset.filter(username__icontains=search_name)
+        return queryset
+
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     template_name = "accounts/cook_detail.html"
     context_object_name = "cook"
+    queryset = Cook.objects.all().prefetch_related("dishes__dish_type")
 
 
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
