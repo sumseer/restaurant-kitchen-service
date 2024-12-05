@@ -2,6 +2,8 @@ from django.urls import path
 
 from kitchen import views
 
+app_name = "kitchen"
+
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -16,6 +18,3 @@ urlpatterns = [
     path("dish/<int:pk>/update/", views.DishUpdateView.as_view(), name="dish-update"),
     path("dish/<int:pk>/delete/", views.DishDeleteView.as_view(), name="dish-delete"),
 ]
-
-
-app_name = "kitchen"
