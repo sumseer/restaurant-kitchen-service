@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from accounts.forms import CookCreationForm
 from accounts.models import Cook
 
 
@@ -22,15 +23,14 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
     model = Cook
     template_name = "accounts/cook_form.html"
-    fields = "__all__"
     success_url = reverse_lazy("accounts:cook-list")
-
+    form_class = CookCreationForm
 
 class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
     template_name = "accounts/cook_form.html"
-    fields = "__all__"
     success_url = reverse_lazy("accounts:cook-list")
+    form_class = CookCreationForm
 
 
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
