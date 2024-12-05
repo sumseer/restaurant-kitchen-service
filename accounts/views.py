@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -37,3 +37,10 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     template_name = "accounts/cook_confirm_delete.html"
     success_url = reverse_lazy("accounts:cook-list")
+
+
+def add_year_of_experience(request, pk):
+    cook = get_object_or_404(Cook, pk=pk)
+    cook.years_of_experience += 1
+    cook.save()
+    return redirect("accounts:cook-detail", pk=cook.pk)
