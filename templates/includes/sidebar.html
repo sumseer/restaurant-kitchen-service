@@ -3,9 +3,12 @@
     User:
     <a href="{% url "accounts:cook-detail" pk=user.id %}">{{ user.username }}</a>
     <br>
-    <a href="{% url "accounts:logout" %}">Logout</a>
+      <form action="{% url "accounts:logout" %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-secondary" type="submit" value="Logout">
+      </form>
   {% else %}
-    <a href="{% url "accounts:login" %}">Sign in</a>
+      <a class="btn btn-secondary" href="{% url "accounts:login" %}">Sign in</a>
   {% endif %}
   <li><a href="{% url "kitchen:index" %}">Home</a></li>
   <li><a href="{% url "accounts:cook-list" %}">All cooks</a></li>
