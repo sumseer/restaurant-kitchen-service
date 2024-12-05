@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete Dish</title>
-</head>
-<body>
-    <h1>Are you sure you want to delete this dish?</h1>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, delete</button>
-    </form>
-    <a href="{% url 'kitchen:dish-list' %}">Cancel</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+  <h1>Delete Dish</h1>
+
+  <p>Are your sure you want to delete dish: {{ dish }} ?</p>
+  <p>
+    <a class="btn btn-primary" role="button" href="{% url "kitchen:dish-list" %}">No, Cancel</a>
+  </p>
+  <form method="post" action="">
+    {% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn btn-danger" />
+  </form>
+{% endblock %}

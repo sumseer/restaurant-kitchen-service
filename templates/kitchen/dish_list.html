@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dishes</title>
-</head>
-<body>
-    <h1>Dishes</h1>
+{% extends "base.html" %}
+{% block content %}
+  <h1>Dish list</h1>
+  {% if dishes %}
     <ul>
-        {% for dish in dishes %}
-            <li>
-                <a href="{% url 'kitchen:dish-detail' dish.pk %}">{{ dish.name }}</a>
-            </li>
-        {% endfor %}
+      {% for dish in dishes %}
+        <li>
+          <a href="{% url "kitchen:dish-detail" pk=dish.id %}">{{ dish.name }}</a>
+        </li>
+      {% endfor %}
     </ul>
-    <a href="{% url 'kitchen:dish-create' %}">Create New Dish</a>
-</body>
-</html>
+  {% endif %}
+  <p><a href="{% url "kitchen:dish-create" %}">Create a new dish</a></p>
+{% endblock %}
