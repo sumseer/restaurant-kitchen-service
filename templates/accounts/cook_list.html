@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooks</title>
-</head>
-<body>
-    <h1>Cooks</h1>
+{% extends "base.html" %}
+{% block content %}
+  <h1>Cooks list</h1>
+  {% if cooks %}
     <ul>
-        {% for cook in cooks %}
-            <li>{{ cook.username }} ({{ cook.years_of_experience }} years of experience)</li>
-        {% endfor %}
+      {% for cook in cooks %}
+        <li>
+          <a href="{% url "accounts:cook-detail" pk=cook.id %}">{{ cook.username }}</a>
+          {% if cook != user %}
+            ({{ cook.first_name }} {{ cook.last_name }})
+          {% else %}
+            (Me)
+          {% endif %}
+        </li>
+      {% endfor %}
     </ul>
-    <a href="{% url 'accounts:cook-create' %}">Create New Cook</a>
-</body>
-</html>
+  {% endif %}
+  <p><a href="{% url "accounts:cook-create" %}">Create a new cook</a></p>
+{% endblock %}

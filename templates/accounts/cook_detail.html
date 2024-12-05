@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ cook.username }} - Cook Details</title>
-</head>
-<body>
-    <h1>{{ cook.username }} - Cook Details</h1>
-    
-    <p><strong>Username:</strong> {{ cook.username }}</p>
-    <p><strong>Full Name:</strong> {{ cook.first_name }} {{ cook.last_name }}</p>
-    <p><strong>Email:</strong> {{ cook.email }}</p>
-    <p><strong>Years of Experience:</strong> {{ cook.years_of_experience }}</p>
-
-    <h2>Assigned Dishes:</h2>
-    <ul>
-        {% for dish in cook.dish_set.all %}
-            <li>{{ dish.name }} ({{ dish.dish_type.name }})</li>
-        {% endfor %}
-    </ul>
-
-    <a href="{% url 'kitchen:cook-update' cook.pk %}">Edit Cook</a> |
-    <a href="{% url 'kitchen:cook-delete' cook.pk %}">Delete Cook</a> |
-    <a href="{% url 'kitchen:cook-list' %}">Back to Cook List</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+  <h2>Cook profile</h2>
+  <p><strong>Full name: </strong>{{ cook.first_name }} {{ cook.last_name }}</p>
+  <p><strong>Email: </strong>{{ cook.email }}</p>
+  <p><strong>Years of experience: </strong>{{ cook.years_of_experience }}</p>
+  <p>
+    <a class="btn btn-primary" role="button" href="{% url "accounts:cook-create" pk=cook.id %}">Update cook</a>
+  </p>
+  <p>
+    <a class="btn btn-danger" role="button" href="{% url "accounts:cook-delete" pk=cook.id %}">Delete cook</a>
+  </p>
+{% endblock %}
