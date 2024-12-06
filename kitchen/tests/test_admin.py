@@ -39,7 +39,9 @@ class DishAdminTest(TestCase):
         )
 
     def test_list_display(self):
-        self.assertEqual(self.admin.list_display, ["name", "price", "dish_type"])
+        self.assertEqual(
+            self.admin.list_display, ["name", "price", "dish_type"]
+        )
 
     def test_search_fields(self):
         self.assertEqual(self.admin.search_fields, ["name", "dish_type__name"])

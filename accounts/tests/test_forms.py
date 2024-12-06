@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from accounts.forms import CookCreationForm, CookSearchForm
-from accounts.models import Cook
 
 
 class CookCreationFormTests(TestCase):

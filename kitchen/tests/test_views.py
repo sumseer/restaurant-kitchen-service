@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -41,7 +40,9 @@ class DishTypeListViewTest(TestCase):
 
     def test_dish_type_list_view_search(self):
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get(reverse("kitchen:dish-type-list"), {"name": "Main"})
+        response = self.client.get(
+            reverse("kitchen:dish-type-list"), {"name": "Main"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Main Course")
         self.assertNotContains(response, "Dessert")
@@ -60,13 +61,17 @@ class ToggleCookInDishTest(TestCase):
 
     def test_toggle_cook_in_dish_add(self):
         self.client.login(username="testcook", password="testpassword")
-        response = self.client.post(reverse("kitchen:dish-toggle-cook", args=[self.dish.id]))
+        response = self.client.post(
+            reverse("kitchen:dish-toggle-cook", args=[self.dish.id])
+        )
         self.assertEqual(response.status_code, 302)
         self.assertIn(self.cook, self.dish.cooks.all())
 
     def test_toggle_cook_in_dish_remove(self):
         self.dish.cooks.add(self.cook)  # Add the cook first
         self.client.login(username="testcook", password="testpassword")
-        response = self.client.post(reverse("kitchen:dish-toggle-cook", args=[self.dish.id]))
+        response = self.client.post(
+            reverse("kitchen:dish-toggle-cook", args=[self.dish.id])
+        )
         self.assertEqual(response.status_code, 302)
         self.assertNotIn(self.cook, self.dish.cooks.all())

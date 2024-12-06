@@ -7,7 +7,9 @@ from accounts.models import Cook
 class CookCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Cook
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "years_of_experience", "email")
+        fields = UserCreationForm.Meta.fields + (
+            "first_name", "last_name", "years_of_experience", "email"
+        )
 
 
 class CookSearchForm(forms.Form):
