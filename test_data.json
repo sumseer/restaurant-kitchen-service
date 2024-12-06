@@ -1,0 +1,304 @@
+[
+  {
+    "model": "accounts.cook",
+    "pk": 2,
+    "fields": {
+      "username": "chef_anna",
+      "first_name": "Anna",
+      "last_name": "Smith",
+      "years_of_experience": 2,
+      "email": "anna.smith@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash1"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 3,
+    "fields": {
+      "username": "chef_john",
+      "first_name": "John",
+      "last_name": "Doe",
+      "years_of_experience": 11,
+      "email": "john.doe@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash2"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 4,
+    "fields": {
+      "username": "chef_emily",
+      "first_name": "Emily",
+      "last_name": "Brown",
+      "years_of_experience": 5,
+      "email": "emily.brown@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash3"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 5,
+    "fields": {
+      "username": "chef_michael",
+      "first_name": "Michael",
+      "last_name": "Taylor",
+      "years_of_experience": 3,
+      "email": "michael.taylor@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash21"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 6,
+    "fields": {
+      "username": "chef_linda",
+      "first_name": "Linda",
+      "last_name": "Martinez",
+      "years_of_experience": 9,
+      "email": "linda.martinez@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash22"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 7,
+    "fields": {
+      "username": "chef_david",
+      "first_name": "David",
+      "last_name": "Lopez",
+      "years_of_experience": 6,
+      "email": "david.lopez@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash23"
+    }
+  },
+  {
+    "model": "accounts.cook",
+    "pk": 8,
+    "fields": {
+      "username": "chef_susan",
+      "first_name": "Susan",
+      "last_name": "Clark",
+      "years_of_experience": 1,
+      "email": "susan.clark@example.com",
+      "password": "pbkdf2_sha256$260000$fakepasswordhash24"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 1,
+    "fields": {
+      "name": "Appetizer"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 2,
+    "fields": {
+      "name": "Main Course"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 3,
+    "fields": {
+      "name": "Dessert"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 4,
+    "fields": {
+      "name": "Soup"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 5,
+    "fields": {
+      "name": "Salad"
+    }
+  },
+  {
+    "model": "kitchen.dishtype",
+    "pk": 6,
+    "fields": {
+      "name": "Side Dish"
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 1,
+    "fields": {
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing and croutons.",
+      "price": "7.99",
+      "dish_type": 5,
+      "cooks": [5, 2]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 2,
+    "fields": {
+      "name": "Grilled Chicken",
+      "description": "Juicy grilled chicken breast served with a side of vegetables.",
+      "price": "12.99",
+      "dish_type": 2,
+      "cooks": [2, 3]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 3,
+    "fields": {
+      "name": "Tomato Soup",
+      "description": "Classic tomato soup with fresh basil and cream.",
+      "price": "6.49",
+      "dish_type": 4,
+      "cooks": [4, 2]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 4,
+    "fields": {
+      "name": "Chocolate Cake",
+      "description": "Rich chocolate cake topped with chocolate ganache.",
+      "price": "5.99",
+      "dish_type": 3,
+      "cooks": [6, 7]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 5,
+    "fields": {
+      "name": "Pancakes",
+      "description": "Fluffy pancakes served with maple syrup.",
+      "price": "8.99",
+      "dish_type": 3,
+      "cooks": [5, 8]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 6,
+    "fields": {
+      "name": "Bruschetta",
+      "description": "Toasted bread topped with diced tomatoes, basil, and olive oil.",
+      "price": "5.49",
+      "dish_type": 1,
+      "cooks": [3, 7]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 7,
+    "fields": {
+      "name": "Steak and Potatoes",
+      "description": "Grilled steak served with garlic mashed potatoes.",
+      "price": "18.99",
+      "dish_type": 2,
+      "cooks": [2, 4]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 8,
+    "fields": {
+      "name": "Tiramisu",
+      "description": "Classic Italian dessert with coffee-soaked ladyfingers and mascarpone.",
+      "price": "6.99",
+      "dish_type": 3,
+      "cooks": [5, 6]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 9,
+    "fields": {
+      "name": "French Onion Soup",
+      "description": "Rich beef broth with caramelized onions, topped with cheese croutons.",
+      "price": "7.99",
+      "dish_type": 4,
+      "cooks": [6, 8]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 10,
+    "fields": {
+      "name": "Greek Salad",
+      "description": "A mix of cucumbers, tomatoes, olives, feta, and olive oil dressing.",
+      "price": "8.49",
+      "dish_type": 5,
+      "cooks": [2, 7]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 11,
+    "fields": {
+      "name": "Garlic Bread",
+      "description": "Crispy bread with a buttery garlic topping.",
+      "price": "3.99",
+      "dish_type": 6,
+      "cooks": [4, 5]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 12,
+    "fields": {
+      "name": "Shrimp Cocktail",
+      "description": "Chilled shrimp served with tangy cocktail sauce.",
+      "price": "9.99",
+      "dish_type": 1,
+      "cooks": [2, 3]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 13,
+    "fields": {
+      "name": "Chicken Alfredo Pasta",
+      "description": "Creamy Alfredo sauce over fettuccine and grilled chicken.",
+      "price": "14.99",
+      "dish_type": 2,
+      "cooks": [4, 7]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 14,
+    "fields": {
+      "name": "Cheesecake",
+      "description": "Rich and creamy cheesecake with a graham cracker crust.",
+      "price": "7.49",
+      "dish_type": 3,
+      "cooks": [7, 8]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 15,
+    "fields": {
+      "name": "Minestrone Soup",
+      "description": "A hearty vegetable soup with beans and pasta.",
+      "price": "6.99",
+      "dish_type": 4,
+      "cooks": [4, 5]
+    }
+  },
+  {
+    "model": "kitchen.dish",
+    "pk": 16,
+    "fields": {
+      "name": "Sweet Potato Fries",
+      "description": "Crispy sweet potato fries with a hint of cinnamon.",
+      "price": "4.99",
+      "dish_type": 6,
+      "cooks": [6, 7]
+    }
+  }
+]

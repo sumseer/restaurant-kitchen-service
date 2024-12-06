@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <h1>Cooks list</h1>
+  <form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-secondary">
+  </form>
+  {% if cooks %}
+    <ul>
+      {% for cook in cooks %}
+        <li>
+          <a href="{% url "accounts:cook-detail" pk=cook.id %}">{{ cook.username }}</a>
+          {% if cook != user %}
+            ({{ cook.first_name }} {{ cook.last_name }})
+          {% else %}
+            (Me)
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <p><a href="{% url "accounts:cook-create" %}">Create a new cook</a></p>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ dish.name }}</h2>
+  <p>{{ dish.description }}</p>
+  <p><strong>Price: </strong>{{ dish.price }}</p>
+  <p>Assigned cooks:</p>
+  <ul>
+    {% for cook in dish.cooks.all %}
+      <li>{{ cook.first_name }} {{ cook.last_name }}</li>
+    {% empty %}
+      <li>No cooks assigned yet.</li>
+    {% endfor %}
+  </ul>
+  <form method="post" action="{% url 'kitchen:dish-toggle-cook' dish.id %}">
+    {% csrf_token %}
+    {% if user in dish.cooks.all %}
+        <button type="submit" class="btn btn-danger">Remove Me</button>
+    {% else %}
+        <button type="submit" class="btn btn-primary">Assign Me</button>
+    {% endif %}
+  </form>
+  <br>
+  <p>
+    <a class="btn btn-primary" role="button" href="{% url "kitchen:dish-update" pk=dish.id %}">Update dish</a>
+  </p>
+  <p>
+    <a class="btn btn-danger" role="button" href="{% url "kitchen:dish-delete" pk=dish.id %}">Delete dish</a>
+  </p>
+{% endblock %}
