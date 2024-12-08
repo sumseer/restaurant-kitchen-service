@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Cook profile</h2>
+  <p><strong>Full name: </strong>{{ cook.first_name }} {{ cook.last_name }}</p>
+  <p><strong>Email: </strong>{{ cook.email }}</p>
+  <p><strong>Years of experience: </strong>{{ cook.years_of_experience }}
+    <a href="{% url "accounts:cook-add-year" cook.id %}" class="btn btn-outline-secondary">
+      Add 1 year
+    </a>
+  </p>
+  <p><strong>Assigned to the following dishes:</strong></p>
+  <ul>
+    {% for dish in cook.dishes.all %}
+      <li>
+        <a href="{% url "kitchen:dish-detail" dish.id %}">{{ dish.name }}</a>
+      </li>
+    {% empty %}
+      <li>No dishes assigned to this cook.</li>
+    {% endfor %}
+  </ul>
+  <p>
+    <a class="btn btn-primary" role="button" href="{% url "accounts:cook-update" pk=cook.id %}">Update cook</a>
+  </p>
+  <p>
+    <a class="btn btn-danger" role="button" href="{% url "accounts:cook-delete" pk=cook.id %}">Delete cook</a>
+  </p>
+{% endblock %}
