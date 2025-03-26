@@ -1,13 +1,56 @@
-{% extends "base.html" %}
-{% block content %}
-  <h1>Delete Cook</h1>
+{% extends 'base.html' %}
 
-  <p>Are your sure you want to delete cook: {{ cook }} ?</p>
-  <p>
-    <a class="btn btn-primary" role="button" href="{% url "accounts:cook-list" %}">No, Cancel</a>
-  </p>
-  <form method="post" action="">
-    {% csrf_token %}
-    <input type="submit" value="Yes, delete" class="btn btn-danger" />
-  </form>
+{% block content %}
+<div class="container mt-4">
+  <div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+      <h1 class="h4 mb-0">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Delete Cook Confirmation
+      </h1>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <p class="lead mb-4">
+          Are you sure you want to permanently delete cook: 
+          <strong class="text-decoration-underline">{{ cook.username }}</strong>?
+        </p>
+        
+        {% if cook.dishes.exists %}
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-circle-fill me-2"></i>
+          This cook is currently assigned to {{ cook.dishes.count }} dish{{ cook.dishes.count|pluralize:"es" }}.
+          Deleting will remove these assignments.
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="d-flex gap-3">
+        <form method="post" class="flex-grow-1">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger w-100">
+            <i class="bi bi-trash-fill me-2"></i>
+            Yes, Delete Permanently
+          </button>
+        </form>
+        
+        <a href="{% url 'accounts:cook-list' %}" class="btn btn-outline-secondary flex-grow-1">
+          <i class="bi bi-x-circle-fill me-2"></i>
+          No, Cancel
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  if (!confirm('WARNING: This will permanently delete "{{ cook.username }}" and cannot be undone.\n\nProceed with deletion?')) {
+    e.preventDefault();
+  }
+});
+</script>
+{% endblock %}
+
 {% endblock %}

@@ -1,27 +1,80 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-  <h2>Cook profile</h2>
-  <p><strong>Full name: </strong>{{ cook.first_name }} {{ cook.last_name }}</p>
-  <p><strong>Email: </strong>{{ cook.email }}</p>
-  <p><strong>Years of experience: </strong>{{ cook.years_of_experience }}
-    <a href="{% url "accounts:cook-experience" cook.id %}" class="btn btn-outline-secondary">
-      Add 1 year
-    </a>
-  </p>
-  <p><strong>Assigned to the following dishes:</strong></p>
-  <ul>
-    {% for dish in cook.dishes.all %}
-      <li>
-        <a href="{% url "kitchen:dish-detail" dish.id %}">{{ dish.name }}</a>
-      </li>
-    {% empty %}
-      <li>No dishes assigned to this cook.</li>
-    {% endfor %}
-  </ul>
-  <p>
-    <a class="btn btn-primary" role="button" href="{% url "accounts:cook-update" pk=cook.id %}">Update cook</a>
-  </p>
-  <p>
-    <a class="btn btn-danger" role="button" href="{% url "accounts:cook-delete" pk=cook.id %}">Delete cook</a>
-  </p>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="h4 mb-0">
+          <i class="bi bi-person-badge me-2"></i>
+          Cook Profile
+        </h2>
+        <div class="btn-group">
+          <a href="{% url 'accounts:cook-update' pk=cook.id %}" 
+             class="btn btn-sm btn-outline-light">
+            <i class="bi bi-pencil-square"></i> Edit
+          </a>
+          <a href="{% url 'accounts:cook-delete' pk=cook.id %}" 
+             class="btn btn-sm btn-outline-light">
+            <i class="bi bi-trash"></i> Delete
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <h3 class="h5">Personal Information</h3>
+            <hr>
+            <p><strong>Username:</strong> {{ cook.username }}</p>
+            <p><strong>Full Name:</strong> {{ cook.first_name }} {{ cook.last_name }}</p>
+            <p><strong>Email:</strong> {{ cook.email }}</p>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="mb-3">
+            <h3 class="h5">Professional Details</h3>
+            <hr>
+            <div class="d-flex align-items-center">
+              <p class="mb-0 me-3"><strong>Experience:</strong> 
+                {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }}
+              </p>
+              <a href="{% url 'accounts:cook-experience' cook.id %}" 
+                 class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-plus-lg"></i> Add Year
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <h3 class="h5">Assigned Dishes</h3>
+        <hr>
+        {% if cook.dishes.all %}
+          <div class="list-group">
+            {% for dish in cook.dishes.all %}
+              <a href="{% url 'kitchen:dish-detail' dish.id %}" 
+                 class="list-group-item list-group-item-action">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>{{ dish.name }}</span>
+                  <span class="badge bg-secondary">
+                    {{ dish.dish_type.name }}
+                  </span>
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No dishes assigned to this cook.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

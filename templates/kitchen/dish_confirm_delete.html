@@ -1,13 +1,44 @@
-{% extends "base.html" %}
-{% block content %}
-  <h1>Delete Dish</h1>
+{% extends 'base.html' %}
 
-  <p>Are your sure you want to delete dish: {{ dish }} ?</p>
-  <p>
-    <a class="btn btn-primary" role="button" href="{% url "kitchen:dish-list" %}">No, Cancel</a>
-  </p>
-  <form method="post" action="">
-    {% csrf_token %}
-    <input type="submit" value="Yes, delete" class="btn btn-danger" />
-  </form>
+{% block content %}
+<div class="container mt-4">
+  <div class="card border-danger">
+    <div class="card-header bg-danger text-white">
+      <h1 class="h4 mb-0">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        Delete Dish
+      </h1>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-danger">
+        <p class="lead mb-4">
+          Are you sure you want to permanently delete the dish: 
+          <strong class="text-decoration-underline">{{ dish.name }}</strong>?
+        </p>
+        
+        {% if dish.cooks.exists %}
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-circle-fill me-2"></i>
+          This dish is currently assigned to {{ dish.cooks.count }} cook{{ dish.cooks.count|pluralize }}.
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="d-flex gap-3">
+        <form method="post" class="flex-grow-1">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger w-100">
+            <i class="bi bi-trash-fill me-2"></i>
+            Yes, Delete Permanently
+          </button>
+        </form>
+        
+        <a href="{% url 'kitchen:dish-list' %}" class="btn btn-outline-secondary flex-grow-1">
+          <i class="bi bi-x-circle-fill me-2"></i>
+          No, Cancel
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,29 +1,65 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-  <h2>{{ dish.name }}</h2>
-  <p>{{ dish.description }}</p>
-  <p><strong>Price: </strong>{{ dish.price }}</p>
-  <p>Assigned cooks:</p>
-  <ul>
-    {% for cook in dish.cooks.all %}
-      <li>{{ cook.first_name }} {{ cook.last_name }}</li>
-    {% empty %}
-      <li>No cooks assigned yet.</li>
-    {% endfor %}
-  </ul>
-  <form method="post" action="{% url "kitchen:dish-cooks-assignment" dish.id %}">
-    {% csrf_token %}
-    {% if user in dish.cooks.all %}
-        <button type="submit" class="btn btn-danger">Remove Me</button>
-    {% else %}
-        <button type="submit" class="btn btn-primary">Assign Me</button>
-    {% endif %}
-  </form>
-  <br>
-  <p>
-    <a class="btn btn-primary" role="button" href="{% url "kitchen:dish-update" pk=dish.id %}">Update dish</a>
-  </p>
-  <p>
-    <a class="btn btn-danger" role="button" href="{% url "kitchen:dish-delete" pk=dish.id %}">Delete dish</a>
-  </p>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="h4 mb-0">{{ dish.name }}</h2>
+        <span class="badge bg-light text-dark fs-6">
+          {{ dish.dish_type.name }}
+        </span>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <p class="lead">{{ dish.description }}</p>
+      <div class="mb-4 p-3 bg-light rounded">
+        <p class="mb-1"><strong>Price:</strong> ${{ dish.price }}</p>
+        <p class="mb-0"><strong>Cooking Time:</strong> {{ dish.cooking_time }} minutes</p>
+      </div>
+
+      <h3 class="h5 mb-3">Assigned Cooks</h3>
+      {% if dish.cooks.all %}
+        <div class="list-group mb-4">
+          {% for cook in dish.cooks.all %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <i class="bi bi-person-check me-2"></i>
+                {{ cook.first_name }} {{ cook.last_name }} ({{ cook.username }})
+              </div>
+              <span class="badge bg-secondary">
+                {{ cook.years_of_experience }} year{{ cook.years_of_experience|pluralize }} experience
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          No cooks assigned to this dish yet.
+        </div>
+      {% endif %}
+
+      <div class="d-flex gap-3 mb-4">
+        <form method="post" action="{% url 'kitchen:dish-cooks-assignment' dish.id %}" class="flex-grow-1">
+          {% csrf_token %}
+          <button type="submit" class="btn {% if user in dish.cooks.all %}btn-outline-danger{% else %}btn-outline-primary{% endif %} w-100">
+            <i class="bi bi-{% if user in dish.cooks.all %}person-dash{% else %}person-plus{% endif %} me-2"></i>
+            {% if user in dish.cooks.all %}Remove Me{% else %}Assign Me{% endif %}
+          </button>
+        </form>
+      </div>
+
+      <div class="d-flex gap-3">
+        <a href="{% url 'kitchen:dish-update' pk=dish.id %}" class="btn btn-primary flex-grow-1">
+          <i class="bi bi-pencil-fill me-2"></i>Edit Dish
+        </a>
+        <a href="{% url 'kitchen:dish-delete' pk=dish.id %}" class="btn btn-outline-danger flex-grow-1">
+          <i class="bi bi-trash-fill me-2"></i>Delete Dish
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
