@@ -34,7 +34,7 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     template_name = "accounts/cook_detail.html"
     context_object_name = "cook"
-    queryset = Cook.objects.all().prefetch_related("dishes__dish_type")
+    queryset = Cook.objects.prefetch_related("dishes__dish_type")
 
 
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
