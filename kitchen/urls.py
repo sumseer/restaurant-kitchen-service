@@ -34,20 +34,24 @@ urlpatterns = [
         views.DishDetailView.as_view(),
         name="dish-detail"
     ),
-    path("dish/create/", views.DishCreateView.as_view(), name="dish-create"),
     path(
-        "dish/<int:pk>/update/",
+        "dishes/create/",
+        views.DishCreateView.as_view(),
+        name="dish-create"
+    ),
+    path(
+        "dishes/<int:pk>/update/",
         views.DishUpdateView.as_view(),
         name="dish-update"
     ),
     path(
-        "dish/<int:pk>/delete/",
+        "dishes/<int:pk>/delete/",
         views.DishDeleteView.as_view(),
         name="dish-delete"
     ),
     path(
-        "dish/<int:pk>/toggle-cook/",
+        "dishes/<int:pk>/cooks/",
         toggle_cook_in_dish,
-        name="dish-toggle-cook"
+        name="dish-cooks-assignment"
     ),
 ]

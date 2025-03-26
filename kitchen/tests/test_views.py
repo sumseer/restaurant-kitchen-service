@@ -62,7 +62,7 @@ class ToggleCookInDishTest(TestCase):
     def test_toggle_cook_in_dish_add(self):
         self.client.login(username="testcook", password="testpassword")
         response = self.client.post(
-            reverse("kitchen:dish-toggle-cook", args=[self.dish.id])
+            reverse("kitchen:dish-cooks-assignment", args=[self.dish.id])
         )
         self.assertEqual(response.status_code, 302)
         self.assertIn(self.cook, self.dish.cooks.all())
@@ -71,7 +71,7 @@ class ToggleCookInDishTest(TestCase):
         self.dish.cooks.add(self.cook)  # Add the cook first
         self.client.login(username="testcook", password="testpassword")
         response = self.client.post(
-            reverse("kitchen:dish-toggle-cook", args=[self.dish.id])
+            reverse("kitchen:dish-cooks-assignment", args=[self.dish.id])
         )
         self.assertEqual(response.status_code, 302)
         self.assertNotIn(self.cook, self.dish.cooks.all())

@@ -11,7 +11,7 @@
       <li>No cooks assigned yet.</li>
     {% endfor %}
   </ul>
-  <form method="post" action="{% url 'kitchen:dish-toggle-cook' dish.id %}">
+  <form method="post" action="{% url "kitchen:dish-cooks-assignment" dish.id %}">
     {% csrf_token %}
     {% if user in dish.cooks.all %}
         <button type="submit" class="btn btn-danger">Remove Me</button>
