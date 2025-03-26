@@ -41,7 +41,7 @@ class AddYearOfExperienceViewTests(TestCase):
 
     def test_add_year_of_experience(self):
         response = self.client.post(
-            reverse("accounts:cook-add-year", args=[self.cook.pk])
+            reverse("accounts:cook-experience", args=[self.cook.pk])
         )
         self.cook.refresh_from_db()
         self.assertEqual(response.status_code, 302)
