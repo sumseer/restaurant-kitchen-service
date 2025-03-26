@@ -34,10 +34,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "kitchen",
-    "accounts",
+
+    # Third-party apps
     "crispy_forms",
     "crispy_bootstrap4",
+
+    # Local apps
+    "accounts",
+    "kitchen",
 ]
 
 MIDDLEWARE = [
